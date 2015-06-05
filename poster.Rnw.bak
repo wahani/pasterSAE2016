@@ -1,0 +1,385 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% a0poster Portrait Poster
+% LaTeX Template
+% Version 1.0 (22/06/13)
+%
+% The a0poster class was created by:
+% Gerlinde Kettl and Matthias Weiser (tex@kettl.de)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%  PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a0,portrait]{a0poster}
+\usepackage[utf8]{inputenc}
+
+\usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\columnsep=100pt % This is the amount of white space between the columns in the poster
+\columnseprule=3pt % This is the thickness of the black line between the columns in the poster
+
+\usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
+
+\usepackage{times} % Use the times font
+%\usepackage{palatino} % Uncomment to use the Palatino font
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{Figures/}} % Location of the graphics files
+\usepackage{booktabs} % Top and bottom rules for table
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+\usepackage{wrapfig} % Allows wrapping text around tables and figures
+
+%bib
+\usepackage{natbib}
+
+% Math
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+
+
+\newcommand{\mysec}[1]{\color{Black}\section*{#1}\color{DarkSlateGray}}
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%  POSTER HEADER 
+%----------------------------------------------------------------------------------------
+
+% The header is divided into two boxes:
+% The first is 75% wide and houses the title, subtitle, names, university/organization and contact information
+% The second is 25% wide and houses a logo for your university/organization or a photo of you
+% The widths of these boxes can be easily edited to accommodate your content as you see fit
+
+\begin{minipage}[b]{0.75\linewidth}
+\Huge \color{NavyBlue} \textbf{saeSim: Simulation Tools for Small Area Estimation} \color{Black}\\ % Title
+% \Huge\textit{An Exploration of Complexity}\\[2cm] % Subtitle
+\huge \textbf{ Sebastian Warnholz \& T. Schmid }\\[0.5cm] % Author(s)
+%\huge Freie Universität Berlin\\[0.4cm] % University/organization
+\Large \texttt{Sebastian.Warnholz@fu-berlin.de} \\
+\end{minipage}
+%
+\begin{minipage}[b]{0.25\linewidth}
+\hfill\includegraphics[width=0.9\linewidth]{logo.png}\\
+\end{minipage}
+
+\vspace{1cm} % A bit of extra whitespace between the header and poster content
+
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % This is how many columns your poster will be broken into, a portrait poster is generally split into 2 columns
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\mysec{Introduction}
+\color{NavyBlue}
+
+\begin{itemize}
+  \item Due to reasons of confidentiality only \textbf{aggregated data} may be accessible. Area-level models in Small Area Estimation can contribute to improved domain predictions in terms of smaller variance in such situations.
+  \item Starting from an unbiased but unreliable direct estimator we will show how outliers on the unit level will affect the area-level predictions. Two types of unit-level (\textbf{symmetric} and \textbf{representative}) contamination will be explored: \textbf{individual outliers} (single observations in a domain) and \textbf{area outliers} (all observations in a domain).
+  \item We will show which type of contaminated data may call for a robustified estimation technique, and on the contrary in which case unit-level contamination is \textit{automatically} been taken care of in the Fay Herriot Model.
+\end{itemize}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Area-Level-Models
+%----------------------------------------------------------------------------------------
+
+\mysec{Fay Herriot (FH) Model}
+
+\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+
+\noindent
+\textbf{Sampling Model}: \hspace{0.5cm} $\tilde{y}_i = \theta_i + e_i$ \\[0.1cm]
+\textbf{Linking Model}: \hspace{1.1cm} $\theta_i = x^\top_i\beta + u_i$ \\[0.1cm]
+\textbf{FH Model}: \hspace{2.8cm} $\tilde{y}_i = \underbrace{x^\top_i\beta + u_i}_{\theta_i} + e_i$
+
+\begin{itemize}
+  % \item \cite{Fay79}
+  \item Uses only area-level information %Can be used if no unit-level information is available
+  \item Improves MSE of area estimator %-- when compared to a direct estimator, relies on an unbiased direct estimator 
+  \item Distribution of $e_i$ is known %-- in practice $\sigma^2_{e, d}$ is assumed to be the (estimated) variance of $\tilde{y}_d$
+  \item EBLUP:
+  \begin{itemize}
+    \item[ ] $\hat{\theta}^{FH}_i = \hat{\gamma}_i\tilde{y}_i + (1 - \hat{\gamma}_i)x^\top_i\hat{\beta} $
+    \item[ ] $\hat{\gamma}_i = \hat{\sigma}_u^2/(\hat{\sigma}_u^2 + \sigma^2_{e, i})$
+  \end{itemize}
+  
+\end{itemize}
+%
+\columnbreak
+%
+\begin{itemize}
+    \item $i = 1, \dots, D$
+		\item $\tilde{y}_i$: direct estimator of area statistic
+		\item $\theta_i$: true area statistic
+    \item $x_i$: area-level auxiliary information
+    \item $\beta$: vector of regression coefficients
+		\item $e_i \sim N(0, \sigma^2_{e, i})$ -- known
+		\item $u_i \sim N(0, \sigma_v^2) \text{ i.i.d.}$
+\end{itemize}
+
+
+\end{multicols}
+
+%------------------------------------------------
+
+\mysec{Robust Fay Herriot (RFH) Model}
+
+%------------------------------------------------
+\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+\fboxsep5mm
+\fbox{\parbox[c]{16cm}{\textbf{Robust EBLUP} under a Fay Herriot Model:
+\[\hat{\theta}^{RFH}_i = x^\top_i\hat{\beta}^\psi + \hat{u}_i^\psi\]
+
+\begin{itemize}
+  \item Replace model parameters with robust \\ versions $\beta^\psi$, $u_i^\psi$ (and $\sigma_u^\psi$)
+  \item Use robustified mixed model estimation \\ equations
+\end{itemize}
+}}
+
+\columnbreak
+
+\noindent Mixed Model: \hspace{0.3cm} $\mathbf{y} = \mathbf{X} \beta + \mathbf{Z} \mathbf{u} + \mathbf{e}$
+\begin{itemize}
+  \item $\mathbf{u} \sim \mathit{N}(0, \mathbf{G})$
+  \item $\mathbf{e} \sim \mathit{N}(0, \mathbf{R})$
+  \item $\mathbf{V} = \mathbf{Z}\mathbf{G}\mathbf{Z}^\top + \mathbf{R}$
+  \item (FH/RFH) $\mathbf{R}$ is assumed to be known. $\mathbf{G}$ needs to be estimated
+\end{itemize}
+\end{multicols}
+
+
+%------------------------------------------------
+\vspace{1cm}
+Robustified mixed model equations for the RFH:
+
+% \begin{eqnarray*}
+% \mathbf{X}^\top\mathbf{V}^{-1}\left(\mathbf{y}-\mathbf{X}\beta\right) &=& 0 \\
+% \left(\mathbf{y}-\mathbf{X}\beta\right)^\top\mathbf{V}^{-1}\frac{\partial\mathbf{V}}{\partial\theta_l}\mathbf{V}^{-1}\left(\mathbf{y}-\mathbf{X}\beta\right) - \tr\left(\mathbf{V}^{-1}\frac{\partial\mathbf{V}}{\partial\theta_l}\right) &=& 0 
+% \end{eqnarray*}
+
+\begin{eqnarray}
+\mathbf{X}^\top\mathbf{V}^{-1} \mathbf{U}^{\frac{1}{2}} \psi(\mathbf{r}) &=& 0 \\
+\psi(\mathbf{r})^\top\mathbf{U}^{\frac{1}{2}}\mathbf{V}^{-1}\frac{\partial\mathbf{G}}{\partial\sigma_u^2}\mathbf{V}^{-1}\mathbf{U}^{\frac{1}{2}} \psi(\mathbf{r}) - \tr\left(\mathbf{V}^{-1}\frac{\partial\mathbf{G}}{\partial\sigma_u^2}K\right) &=& 0\\
+\mathbf{Z}^\top \mathbf{R}^{-\frac{1}{2}} \psi\left(\mathbf{R}^{-\frac{1}{2}} (\mathbf{y} - \mathbf{X}\beta - \mathbf{Z}\mathbf{u})\right) - \mathbf{G}^{-\frac{1}{2}}\psi(\mathbf{G}^{-\frac{1}{2}}\mathbf{u}) &=& 0
+\end{eqnarray}
+
+\vspace{0.5cm}
+\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+
+\begin{itemize}
+  \item $\mathbf{U}$: matrix of diagonal elements of $\mathbf{V}$
+%\item $K = c\mathbf{I}$ with $c = E()$
+  \item $\mathbf{r} = \mathbf{U}^{-\frac{1}{2}} \left(\mathbf{y}-\mathbf{X}\beta\right)$
+  \item $\psi(u) = u \min\left(1, \frac{b}{|u|}\right)$
+  \item The equations need to be solved iteratively
+  \begin{enumerate}
+    \item Solve equation 1 for $\beta^\psi$
+    \item Given $\beta^\psi$ solve equation 2 for $\sigma_u^\psi$
+    \item Iterate over steps 1 and 2 until $\beta^\psi$ and $\sigma_u^\psi$ converge
+    \item Given $\beta^\psi$ and $\sigma_u^\psi$ solve equation 3 for $u^\psi$
+  \end{enumerate}
+\end{itemize}
+
+\columnbreak
+
+% \includegraphics[width=16cm]{psiFunction.pdf}
+
+\end{multicols}
+
+
+
+%----------------------------------------------------------------------------------------
+%  Data
+%----------------------------------------------------------------------------------------
+
+\mysec{From Unit- to Area-Level Data}
+
+\begin{minipage}{0.5\linewidth}
+Area-Level Model: \hspace{1cm} $\tilde{y}_i = x^\top_i\beta + u_i + e_i$\\
+Unit-Level Model: \hspace{0.8cm} $y_{ij} = x^\top_{ij}\beta + u_i + e_{ij}$
+
+\end{minipage}
+\hfill
+\begin{minipage}{0.5\linewidth}
+\begin{itemize}
+  \item $y_{ij}$: unit-level observation $j$ in area $i$; $j = 1, \dots, N_i$
+  \item $x_{ij}$: unit-level observed auxiliary information
+  \item $e_{ij}$: unit-level model error; $e_{ij} \sim N(0, \sigma_e^2)$
+\end{itemize}
+% <<tab1, echo=FALSE, results='asis'>>=
+% print(xtable(mat, digits = c(0, 0, 0, 0, 1)), include.rownames = FALSE, sanitize.colnames.function = function(x) x,
+%       floating = FALSE)
+% @
+% %\captionof{table}{\color{Green} Figure caption}
+
+\end{minipage}
+  
+
+
+%------------------------------------------------
+
+\begin{minipage}{0.4\linewidth}
+$y_{ij} = x_{ij} + u^*_i + e^*_{ij}$
+\begin{itemize}
+  \item $x_{ij} \sim N(0, 5^2)$
+  \item $u^*_i \sim N(0, 5^2) + \delta_i N(0, 50^2)$
+  \item $e^*_{ij} \sim N(0, 30^2) + \zeta_{ij} N(0, 300^2)$
+  \item area outliers: $\zeta_{ij} = 0$\\$\delta_i = 1$ for domains 90 to 100
+  \item individual outliers: $\delta_{i} = 0$, \\$\zeta_{ij} \sim B(0.1)$ for domains 90 to 100
+  \item $D = 100$, $N_i = 10000$, $n_i = 10$
+\end{itemize}
+
+\end{minipage}
+\hfill
+\begin{minipage}{0.6\linewidth}  
+% \includegraphics[width=\linewidth]{unitAreaCont.pdf}
+\end{minipage}
+\vspace{0.5cm}
+
+
+
+
+
+\columnbreak
+
+%----------------------------------------------------------------------------------------
+%	Simulation Studies
+%----------------------------------------------------------------------------------------
+
+\mysec{Model-based Simulation}
+
+\fboxsep2mm
+\fbox{\parbox[c]{\linewidth}{
+\begin{itemize}
+  \item Individual outliers will increase the MSE of the direct estimator
+  \item FH and RFH are \textit{robust} against individual outliers
+  \item RFH is \textit{robust} against area outliers
+\end{itemize}
+}}
+
+% \includegraphics[width=\linewidth]{modelBasedI.pdf}\vspace{0.1cm}
+
+%
+% \begin{minipage}{0.1\linewidth}
+% \end{minipage}
+% %
+% \hfill
+%
+\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+Simulation setup:
+\[y_{ij} = 100 + x_{ij} + u^*_i + e^*_{ij}\]
+\begin{itemize}
+  \item $x_{ij} \sim N(0, 5^2)$
+  \item $u^*_i \sim N(0, 5^2) + \delta_i N(0, 50^2)$
+  \item $e^*_{ij} \sim N(0, 30^2) + \zeta_{ij} N(0, 300^2)$
+  \item 500 repetitions, $D = 100$, $N_i = 10000$, $n_i = 10$ (SRSWOR)
+\end{itemize}
+%
+\columnbreak
+%
+\noindent Simulation scenarios:
+\begin{itemize}
+  \item (0, 0) no outliers: $(\delta_i, \zeta_{ij}) = 0$
+  \item (0, u) area outliers: $\zeta_{ij} = 0$\\$\delta_i = 1$ for domains 96 to 100
+  \item (e, 0) individual outliers: $\delta_{i} = 0$, \\$\zeta_{ij} \sim B(0.1)$ for domains 91 to 95
+  \item (e, u) area and individual outliers: \\$\delta_i = 1$ for domains 96 to 100, \\$\zeta_{ij} \sim B(0.1)$ for domains 91 to 95
+\end{itemize}
+\end{multicols}
+
+%------------------------------------------------
+
+\mysec{Design-based Simulation}
+\begin{minipage}{0.5\linewidth}
+\fboxsep2mm
+\fbox{\parbox[c]{\linewidth}{
+Improved MSE vs. introduced BIAS 
+}}
+\begin{itemize}
+  \item Synthetic population of enterprises provided by \textit{Statistics Netherlands (CBS)}
+  \item Target of Estimation: Total tax-turnover for 20 industry domains
+  \item Covariates: 
+  \begin{itemize}
+    \item Tax-turnover in previous year
+    \item Number of employees
+  \end{itemize}
+  \item Sampling Design:
+  \begin{itemize}
+    \item Stratified: Strata defined by the combination of industries and firm-size-class
+    \item SRSWOR is selected from each strata
+    \item Larger firms are selected with probability 1
+  \end{itemize}
+\end{itemize}
+\end{minipage}
+%
+\hfill
+%
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSIONS
+%----------------------------------------------------------------------------------------
+
+\mysec{Conclusions}
+\color{NavyBlue}
+
+\begin{itemize}
+  \item \textbf{Individual outliers} lead to unreliable direct estimators. The FH and RFH estimators will \text{adjust} for that unreliablility. Both use the estimated standard error of the direct estimator to weight down unreliable direct estimators.
+  \item The RFH will reduce the MSE of the domain predictions in the presence of \textbf{outlying areas} in contrast to the FH. However, a larger MSE is introduced for the outlying areas.
+  \item In the \textbf{design-based simulation} the FH and RFH estimator improve the MSE but introduce a severe bias to the predictions. How that \textbf{bias} can be explained, while using an unbiased direct estimator is unclear at this time and needs further exploration.
+  \item From a unit-level perspective, design weights can help to address heterogeneity in the data. However, outlier robustness can still be an issue, which may be solved in a second step in area-level models.
+\end{itemize}
+
+\color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+\bibliographystyle{agsm} % Plain referencing style
+\bibliography{references} % Use the example bibliography file sample.bib
+
+\end{multicols}
+
+%----------------------------------------------------------------------------------------
+%  Author Information
+%----------------------------------------------------------------------------------------
+
+\vfill
+\vspace{0.5cm}
+\begin{minipage}[b]{0.22\linewidth}
+\includegraphics[width=\linewidth]{FuBerlin}
+\end{minipage}
+%
+\hfill
+%
+\begin{minipage}[b]{0.22\linewidth}
+\Large\textbf{T. Schmid \& S. Warnholz}\\[0.5cm] % Author(s)
+\large
+Freie Universität Berlin\\
+Department of Economics
+\end{minipage}
+%
+\hfill
+%
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
+
+%----------------------------------------------------------------------------------------

@@ -1,0 +1,238 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% a0poster Portrait Poster
+% LaTeX Template
+% Version 1.0 (22/06/13)
+%
+% The a0poster class was created by:
+% Gerlinde Kettl and Matthias Weiser (tex@kettl.de)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%  PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a0,portrait]{a0poster}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+
+\usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\columnsep=100pt % This is the amount of white space between the columns in the poster
+\columnseprule=3pt % This is the thickness of the black line between the columns in the poster
+
+\usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
+
+\usepackage{times} % Use the times font
+%\usepackage{palatino} % Uncomment to use the Palatino font
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{figs/}} % Location of the graphics files
+\usepackage{booktabs} % Top and bottom rules for table
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+\usepackage{wrapfig} % Allows wrapping text around tables and figures
+
+%bib
+\usepackage{natbib}
+
+% Math
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+
+
+\newcommand{\mysec}[1]{\color{Black}\section*{#1}\color{DarkSlateGray}}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+% Code highlighting
+\input{highlighting}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%  POSTER HEADER 
+%----------------------------------------------------------------------------------------
+
+% The header is divided into two boxes:
+% The first is 75% wide and houses the title, subtitle, names, university/organization and contact information
+% The second is 25% wide and houses a logo for your university/organization or a photo of you
+% The widths of these boxes can be easily edited to accommodate your content as you see fit
+
+\begin{minipage}[b]{0.75\linewidth}
+\Huge \color{NavyBlue} \textbf{saeSim: Simulation Tools for Small Area Estimation} \color{Black}\\[0.5cm] % Title
+% \Huge\textit{An Exploration of Complexity}\\[2cm] % Subtitle
+\huge \textbf{ Sebastian Warnholz \& T. Schmid }\\[0.5cm] % Author(s)
+%\huge Freie Universität Berlin\\[0.4cm] % University/organization
+\Large \texttt{Sebastian.Warnholz@fu-berlin.de} \\
+\end{minipage}
+%
+\begin{minipage}[b]{0.25\linewidth}
+\hfill\includegraphics[width=0.9\linewidth]{logo.png}\\
+\end{minipage}
+
+\vspace{1cm} % A bit of extra whitespace between the header and poster content
+
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % This is how many columns your poster will be broken into, a portrait poster is generally split into 2 columns
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\mysec{Introduction}
+\color{NavyBlue}
+
+\begin{itemize}
+  \item Remark 1
+  \item Remark 2
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	Simulation-Framework
+%----------------------------------------------------------------------------------------
+
+\mysec{Simulation Framework}
+
+\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+
+asdasd
+
+\columnbreak
+
+\includegraphics[width=\linewidth]{figs/flowdiagram}
+
+\end{multicols}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Code-Example
+%----------------------------------------------------------------------------------------
+
+\mysec{Code Example}
+
+\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+
+\input{Rmd/codeExample}
+
+\columnbreak
+
+...
+
+\end{multicols}
+
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSIONS
+%----------------------------------------------------------------------------------------
+
+\mysec{Conclusions}
+\color{NavyBlue}
+
+\begin{itemize}
+  \item Remark 1
+  \item Remark 2
+\end{itemize}
+
+\color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+\bibliographystyle{agsm} % Plain referencing style
+\bibliography{references} % Use the example bibliography file sample.bib
+
+\end{multicols}
+
+%----------------------------------------------------------------------------------------
+%  Author Information
+%----------------------------------------------------------------------------------------
+
+\vfill
+\vspace{0.5cm}
+\begin{minipage}[b]{0.3\linewidth}
+  \Large\textbf{Timo Schmid}\\[0.5cm]
+  \large 
+  Department of Economics\\
+  Freie Universit\"at Berlin\\
+  D-14195 Berlin, Germany\\
+  \texttt{Timo.Schmid@fu-berlin.de}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\linewidth}
+\includegraphics[width=\linewidth]{FuBerlin}
+\end{minipage}
+%%
+\hfill
+%%
+\begin{minipage}[b]{0.3\linewidth}
+\begin{flushright}
+  \Large\textbf{Sebastian Warnholz}\\[0.5cm]
+  \large 
+  Department of Economics\\
+  Freie Universit\"at Berlin\\
+  D-14195 Berlin, Germany\\
+  \texttt{Sebastian.Warnholz@fu-berlin.de}
+\end{flushright}
+\end{minipage}
+%
+
+%----------------------------------------------------------------------------------------
+\end{document}
+%----------------------------------------------------------------------------------------
