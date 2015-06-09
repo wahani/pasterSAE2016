@@ -96,6 +96,9 @@
 
 \newcommand{\mysec}[1]{\color{Black}\section*{#1}\color{DarkSlateGray}}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\inputR}[1]{\small\input{#1}\normalsize}
+
 
 % Code highlighting
 \input{highlighting}
@@ -136,20 +139,18 @@
 \mysec{Introduction}
 \color{NavyBlue}
 
-\begin{itemize}
-  \item Remark 1
-  \item Remark 2
-\end{itemize}
 
-%----------------------------------------------------------------------------------------
-%	Simulation-Framework
-%----------------------------------------------------------------------------------------
 
-\mysec{Simulation Framework}
 
 \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
 
-asdasd
+\begin{itemize}
+  \item Unified markup/tools for the composition of simulation studies in the context of small area estimation.
+  \item Small area estimation summarises the development and application of statistical methods to report statistics for small groups. \textit{Small} refers to the small number of sampled units.
+  \item Model and design based simulation studies have been used to introduce new methods to the field.
+  \item The package highlights a specific way to map a simulation study into \code{R}, namely in terms of a pipeline where a data frame is modified in each step. Also frequently used tools are ready to use which make the composition of such studies considerably more easy.
+  \item With this package the composition of a simulation study is reduced to \textit{chaining the steps together}.
+\end{itemize}
 
 \columnbreak
 
@@ -157,23 +158,47 @@ asdasd
 
 \end{multicols}
 
-
-
 %----------------------------------------------------------------------------------------
-%	Code-Example
+%	Features
 %----------------------------------------------------------------------------------------
 
-\mysec{Code Example}
+\mysec{Data Generation}
 
-\begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+\begin{verse}
+\textit{Predefined setups and functions to generate random numbers as \textit{random effects} including spatial correlation. Also a simple interface to univeriate random number generators in \code{R}.}
+\end{verse}
 
-\input{Rmd/codeExample}
+%\[y_{ij} = 100 + 2 x_{ij} + v_i + e_{ij} \text{, with } x\text{, }e \sim \mathit{N}(0, 4^2)\]
 
-\columnbreak
+\inputR{Rmd/dataGeneration}
 
-...
 
-\end{multicols}
+\mysec{Outliers}
+
+\begin{verse}
+\textit{Easy introduction of outlier contaminated data.}
+\end{verse}
+
+\inputR{Rmd/outliers}
+\includegraphics[width=\linewidth]{figs/outliers/outliers-1}
+
+\mysec{Heteroscedasticity}
+
+\begin{verse}
+\textit{Different variances in each domain? For each observation? Maybe a random slope?}
+\end{verse}
+
+\mysec{Sampling}
+
+\begin{verse}
+\textit{Sampling schemes like simple random sampling in domains and cluster sampling.}
+\end{verse}
+
+\mysec{Parallel computations}
+
+\begin{verse}
+\textit{Simulation studies are embarrassingly parallel. For parallel computations we utilize \code{parallelMap} which makes it easy to switch between different parallel back ends in \code{R} (multicore, socket, mpi, BatchJobs).}
+\end{verse}
 
 
 %----------------------------------------------------------------------------------------

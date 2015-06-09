@@ -1,0 +1,13 @@
+```{r echo = FALSE, message = FALSE}
+library("saeSim")
+```
+
+```{r}
+setup <- sim_base() %>% 
+  sim_gen_x() %>% # x ~ N(0, 16) iid
+  sim_gen_e() %>% # e ~ N(0, 16) iid
+  sim_gen_generic(rt, df = 2, groupVars = "idD", name = "v") %>%
+  sim_resp_eq(y = 100 + 2 * x + v + e)
+setup
+```
+
