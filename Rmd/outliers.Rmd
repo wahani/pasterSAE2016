@@ -10,16 +10,24 @@ setup <- sim_base() %>%
   sim_gen_e() %>%
   sim_gen_generic(rnorm, groupVars = "idD", name = "v") %>%
   sim_resp_eq(y = 100 + 2 * x + v + e)
+```
 
-set.seed(20)
+- Set the frequency or probability for adding contaminated observations
+- Specify contamination within domains or across the population
+- Change between area and unit level contamination
+
+```{r}
+setup %>% 
+  sim_gen_cont(gen_generic(rnorm, sd = 150, name = "e"), 0.1, "unit")
 ```
 
 ```{r eval=FALSE}
 autoplot(setup)
-autoplot(setup %>% sim_gen_vc())
+autoplot(setup %>% sim_gen_vc()) # contamination on area-level 
 ```
 
 ```{r outliers, echo=FALSE, dpi=600, fig.width=10, fig.height=4}
+set.seed(20)
 p1 <- autoplot(setup)
 p2 <- autoplot(setup %>% sim_gen_vc())
 grid.arrange(p1, p2, ncol = 2)

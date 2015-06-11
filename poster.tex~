@@ -72,7 +72,7 @@
 
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side
 \columnsep=100pt % This is the amount of white space between the columns in the poster
-\columnseprule=1pt % This is the thickness of the black line between the columns in the poster
+\columnseprule=3pt % This is the thickness of the black line between the columns in the poster
 
 \usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
 
@@ -97,7 +97,7 @@
 \newcommand{\mysec}[1]{\color{Black}\section*{#1}\color{DarkSlateGray}}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \newcommand{\code}[1]{\texttt{#1}}
-\newcommand{\inputR}[1]{\input{#1}}
+\newcommand{\inputR}[1]{\small\input{#1}\normalsize}
 
 
 % Code highlighting
@@ -137,7 +137,10 @@
 %----------------------------------------------------------------------------------------
 
 \mysec{Introduction}
-%\color{NavyBlue}
+\color{NavyBlue}
+
+
+
 
 \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
 
@@ -155,12 +158,11 @@
 
 \end{multicols}
 
-%-------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 %	Features
-%-------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 
 \mysec{Data Generation}
-%-------------------------------------------------------------------------------
 
 \begin{verse}
 \textit{Predefined setups and functions to generate random numbers as \textit{random effects} including spatial correlation. Also a simple interface to univeriate random number generators in \code{R}.}
@@ -172,39 +174,27 @@
 
 
 \mysec{Outliers}
-%-------------------------------------------------------------------------------
 
-% \begin{verse}
-% \textit{Easy introduction of outlier contaminated data.}
-% \end{verse}
+\begin{verse}
+\textit{Easy introduction of outlier contaminated data.}
+\end{verse}
 
 \inputR{Rmd/outliers}
 \includegraphics[width=\linewidth]{figs/outliers/outliers-1}
 
-\columnbreak
+\mysec{Heteroscedasticity}
 
-
-
-\mysec{Basc idea}
-%-------------------------------------------------------------------------------
 \begin{verse}
-\textit{Define scenarios, explain differences!}
+\textit{Different variances in each domain? For each observation? Maybe a random slope?}
 \end{verse}
-\inputR{Rmd/basicIdea}
-
-\noindent\rule{\linewidth}{0.4pt}
-
 
 \mysec{Sampling}
-%-------------------------------------------------------------------------------
 
 \begin{verse}
 \textit{Sampling schemes like simple random sampling in domains and cluster sampling.}
 \end{verse}
 
-
 \mysec{Parallel computations}
-%-------------------------------------------------------------------------------
 
 \begin{verse}
 \textit{Simulation studies are embarrassingly parallel. For parallel computations we utilize \code{parallelMap} which makes it easy to switch between different parallel back ends in \code{R} (multicore, socket, mpi, BatchJobs).}
