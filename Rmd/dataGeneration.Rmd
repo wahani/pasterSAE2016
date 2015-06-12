@@ -2,11 +2,15 @@
 library("saeSim")
 ```
 
+- You can use predefined generators, e.g. for spatially correlated variates, or include univariate random number generators from `R`.
+- `sim_gen` defines the position in the chain. `gen_generic` controls the generation process and accepts any random number generator. Also we defined shortcuts like `sim_gen_generic` to be less verbose.
+- In the following you see a definition for drawing numbers from a linear mixed model. The response is constructed with an R expression and set by `sim_resp_eq`.
+
 ```{r}
-setup <- sim_base() %>% 
-  sim_gen_x() %>% # x ~ N(0, 16) iid
-  sim_gen_e() %>% # e ~ N(0, 16) iid
-  sim_gen_generic(rt, df = 2, groupVars = "idD", name = "v") %>%
+setup <- sim_base() %>% # default with 100 areas (domains) and 100 units each
+  sim_gen(gen_generic(rnorm, sd = 4, name = "x")) %>% 
+  sim_gen(gen_generic(rnorm, sd = 4, name = "e")) %>%
+  sim_gen_generic(rnorm, sd = 2, groupVars = "idD", name = "v") %>%
   sim_resp_eq(y = 100 + 2 * x + v + e)
 setup
 ```

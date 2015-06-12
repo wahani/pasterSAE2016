@@ -59,6 +59,7 @@
    \@setminipage}}%
  {\par\unskip\endMakeFramed%
  \at@end@of@kframe}
+\def\verbatim{\small\@verbatim \frenchspacing\@vobeyspaces \@xverbatim}
 \makeatother
 
 \definecolor{shadecolor}{rgb}{.97, .97, .97}
@@ -98,6 +99,7 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\inputR}[1]{\input{#1}}
+\usepackage{hyperref}
 
 
 % Code highlighting
@@ -139,13 +141,17 @@
 \mysec{Introduction}
 %\color{NavyBlue}
 
+\begin{verse}
+\textit{The package provides tools for the composition of simulation studies in the context of small area estimation. We want to support and encourage the publication of source code by providing a set of unified tools for the community.}
+\end{verse}
+
 \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
 
 \begin{itemize}
-  \item Unified markup/tools for the composition of simulation studies in the context of small area estimation.
-  \item Small area estimation summarises the development and application of statistical methods to report statistics for small groups. \textit{Small} refers to the small number of sampled units.
+  \item The field of Small Area Estimation summarises the development and application of statistical methods to report statistics for small groups. \textit{Small} refers to the small number of sampled units within groups.
   \item Model and design based simulation studies have been used to introduce new methods to the field.
-  \item The package highlights a specific way to map a simulation study into \code{R}, namely in terms of a pipeline where a data frame is modified in each step. Also frequently used tools are ready to use which make the composition of such studies considerably more easy.
+  \item Although we have small area estimation in mind, the framework may prove useful for the composition of micro simulations in general.
+  \item The package highlights a specific way to map a simulation study into \code{R}, namely in terms of a pipeline where a data frame is modified in each step. 
   \item With this package the composition of a simulation study is reduced to \textit{chaining the steps together}.
 \end{itemize}
 
@@ -159,14 +165,12 @@
 %	Features
 %-------------------------------------------------------------------------------
 
-\mysec{Data Generation}
+\mysec{Data generation}
 %-------------------------------------------------------------------------------
 
 \begin{verse}
-\textit{Predefined setups and functions to generate random numbers as \textit{random effects} including spatial correlation. Also a simple interface to univeriate random number generators in \code{R}.}
+\textit{\texttt{saeSim} provides several functions to make the composition and generation of synthetic population data more efficient.}
 \end{verse}
-
-%\[y_{ij} = 100 + 2 x_{ij} + v_i + e_{ij} \text{, with } x\text{, }e \sim \mathit{N}(0, 4^2)\]
 
 \inputR{Rmd/dataGeneration}
 
@@ -174,53 +178,65 @@
 \mysec{Outliers}
 %-------------------------------------------------------------------------------
 
-% \begin{verse}
-% \textit{Easy introduction of outlier contaminated data.}
-% \end{verse}
+\begin{verse}
+\textit{Outliers can be added to the data generation. \texttt{sim\_gen\_cont} provides the interface to control the degree and level of contamination.}
+\end{verse}
 
 \inputR{Rmd/outliers}
 \includegraphics[width=\linewidth]{figs/outliers/outliers-1}
 
 \columnbreak
 
-
-
-\mysec{Basc idea}
-%-------------------------------------------------------------------------------
-\begin{verse}
-\textit{Define scenarios, explain differences!}
-\end{verse}
-\inputR{Rmd/basicIdea}
-
-\noindent\rule{\linewidth}{0.4pt}
-
-
-\mysec{Sampling}
-%-------------------------------------------------------------------------------
-
-\begin{verse}
-\textit{Sampling schemes like simple random sampling in domains and cluster sampling.}
-\end{verse}
-
-
 \mysec{Parallel computations}
 %-------------------------------------------------------------------------------
 
 \begin{verse}
-\textit{Simulation studies are embarrassingly parallel. For parallel computations we utilize \code{parallelMap} which makes it easy to switch between different parallel back ends in \code{R} (multicore, socket, mpi, BatchJobs).}
+\textit{Simulation studies are embarrassingly parallel. For parallel computations we utilize \code{parallelMap} which makes it easy to switch between different parallel back-ends in \code{R}, e.g. multicore, socket, MPI and BatchJobs.}
 \end{verse}
 
+\inputR{Rmd/parallelComputations}
 
+
+\mysec{Extensions}
+%-------------------------------------------------------------------------------
+
+\begin{verse}
+\textit{To make \texttt{saeSim} more than just a tool for data generation define your own components and arrange them in the process.}
+\end{verse}
+
+\begin{itemize}
+  \item This is a complete example beginning with the data generation, followed by simple random sampling in each domain and completing with a comparison of the mean squared error of the sample mean and the average of a linear predictor in each domain.
+  \item Here we define \texttt{comp\_lm} to use a linear model to predict the area means. The data is aggregated for each domain by the aggregation function \texttt{sim\_agg}.
+  \item At this time we do not see the need to provide tools for further reshaping and aggregation of results. Instead we rely on existing packages like \texttt{dplyr} which is used after the call to \texttt{sim}.
+\end{itemize}
+
+\begin{minipage}[b]{0.55\linewidth}
+  \inputR{Rmd/extensions}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[width=\linewidth]{extensions/extensions_boxplot-1}
+\end{minipage}
 %----------------------------------------------------------------------------------------
 %	CONCLUSIONS
 %----------------------------------------------------------------------------------------
 
-\mysec{Conclusions}
-\color{NavyBlue}
+\mysec{Design and naming}
+%-------------------------------------------------------------------------------
+
+\begin{verse}
+\textit{You do not have to redefine, reuse instead!}
+\end{verse}
+\inputR{Rmd/basicIdea}
+
+
+\mysec{Remarks}
+%-------------------------------------------------------------------------------
 
 \begin{itemize}
-  \item Remark 1
-  \item Remark 2
+  \item We hope to encourage the small area estimation community to contribute and publish the code of simulation studies alongside articles.
+  \item \texttt{saeSim} is a suggestion how such studies can be conducted. The design aims to use common tools and to remove control structures from the code. At the same time we encourage the definition of short and self contained functions as \textit{components}.
+  \item The package is not complete. If you have suggestions you are welcome to contribute to \texttt{https://github.com/wahani/saeSim}.
 \end{itemize}
 
 \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content

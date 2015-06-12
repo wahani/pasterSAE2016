@@ -1,0 +1,38 @@
+```{r echo=FALSE, message=FALSE}
+library("saeSim")
+library("ggplot2")
+library("gridExtra")
+library("dplyr")
+
+setup <- sim_base() %>% 
+  sim_gen_x() %>%
+  sim_gen_e() %>%
+  sim_resp_eq(y = 100 + 2 * x + e)
+
+set.seed(1)
+```
+
+```{r fig.keep='none', message=FALSE}
+comp_lm <- function(dat) {
+  dat$lm <- predict(lm(y ~ x, data = dat))
+  dat
+}
+
+simDat <- setup %>% sim_sample() %>% 
+  sim_comp_popMean() %>% 
+  sim_comp_sample(comp_lm) %>% 
+  sim_agg() %>% sim(R = 100) %>% 
+  rbind_all() %>% group_by(idD) %>% 
+  summarise(
+    MSE_direct = mean((y - popMean)^2), 
+    MSE_lm = mean((lm - popMean)^2)
+    )
+boxplot(simDat$MSE_direct, simDat$MSE_lm, 
+        names = c("sample mean", "lm"),
+        main = "Comparison of MSE")
+```
+
+```{r extensions_boxplot, fig.width=4, fig.height=3.7, echo = FALSE, dev='pdf', dpi=300}
+par(mar = c(2, 2, 1 , 1))
+boxplot(simDat$MSE_direct, simDat$MSE_lm, names = c("sample mean", "lm"), main = "Comparison of MSE")
+```

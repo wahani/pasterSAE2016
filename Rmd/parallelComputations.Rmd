@@ -1,0 +1,21 @@
+```{r echo = FALSE, message = FALSE}
+library("saeSim")
+library("ggplot2")
+library("gridExtra")
+
+setup <- sim_base() %>% 
+  sim_gen_x() %>%
+  sim_gen_e() %>%
+  sim_gen_generic(rnorm, groupVars = "idD", name = "v") %>%
+  sim_resp_eq(y = 100 + 2 * x + v + e)
+```
+
+- To start the simulation use the function `sim` and specify the number of runs.
+- To start the simulation in parallel define the `mode` and number of `cpus`.
+- Packages and also objects can be loaded on all nodes with extra arguments to `sim`.
+- Here the we perform 16 runs on 4 cores. `sim` always returns a `list` and here we combine the results directly using `rbind_all`.
+
+```{r}
+sim(setup, R = 16, mode = "socket", cpus = 4) %>% (dplyr::rbind_all) %>% dim
+```
+

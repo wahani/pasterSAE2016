@@ -1,0 +1,32 @@
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  To start the simulation use the function \texttt{sim} and specify the
+  number of runs.
+\item
+  To start the simulation in parallel define the \texttt{mode} and
+  number of \texttt{cpus}.
+\item
+  Packages and also objects can be loaded on all nodes with extra
+  arguments to \texttt{sim}.
+\item
+  Here the we perform 16 runs on 4 cores. \texttt{sim} always returns a
+  \texttt{list} and here we combine the results directly using
+  \texttt{rbind\_all}.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sim}\NormalTok{(setup, }\DataTypeTok{R =} \DecValTok{16}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"socket"}\NormalTok{, }\DataTypeTok{cpus =} \DecValTok{4}\NormalTok{) %>%}\StringTok{ }\NormalTok{(dplyr::rbind_all) %>%}\StringTok{ }\NormalTok{dim}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Starting parallelization in mode=socket with cpus=4.
+## Mapping in parallel: mode = socket; cpus = 4; elements = 16.
+## Stopped parallelization. All cleaned up.
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 160000      8
+\end{verbatim}

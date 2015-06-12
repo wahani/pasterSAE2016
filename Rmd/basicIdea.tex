@@ -1,23 +1,20 @@
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{setup1 <-}\StringTok{ }\KeywordTok{sim_base_lm}\NormalTok{() %>%}\StringTok{ }\KeywordTok{sim_sample}\NormalTok{(}\KeywordTok{sample_number}\NormalTok{(}\DecValTok{5}\NormalTok{))}
-\NormalTok{setup2 <-}\StringTok{ }\KeywordTok{sim_base_lm}\NormalTok{() %>%}\StringTok{ }\KeywordTok{sim_sample}\NormalTok{(}\KeywordTok{sample_fraction}\NormalTok{(}\FloatTok{0.05}\NormalTok{))}
+\NormalTok{setup1 <-}\StringTok{ }\NormalTok{setup %>%}\StringTok{ }\KeywordTok{sim_sample}\NormalTok{(}\KeywordTok{sample_number}\NormalTok{(}\DecValTok{5}\NormalTok{))}
+\NormalTok{setup2 <-}\StringTok{ }\NormalTok{setup %>%}\StringTok{ }\KeywordTok{sim_sample}\NormalTok{(}\KeywordTok{sample_fraction}\NormalTok{(}\FloatTok{0.05}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  \texttt{setup1} and \texttt{setup2} differ in the specific way samples
-  are drawn. \texttt{sim\_sample} is responsible to find the position in
-  the process
+  \texttt{setup1} and \texttt{setup2} only differ in the specific way
+  samples are drawn.
 \item
-  Every \texttt{sim\_*} function expects a simulation setup or
-  \texttt{data.frame} as first argument
-\item
-  Every \texttt{sim\_*} controls at which position in the process a
-  function is called
+  \texttt{sim\_sample} inserts the sampling function at the appropriate
+  position in the process.
 \item
   For every step in the process tools are named using the corresponding
-  prefix, i.e. \texttt{gen\_generic} or \texttt{sample\_fraction}
+  prefix, e.g. \texttt{gen\_generic} for \textit{data generation} or
+  \texttt{sample\_fraction} for \textit{drawing samples}.
 \end{itemize}
