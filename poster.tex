@@ -119,7 +119,7 @@
 \begin{minipage}[b]{0.75\linewidth}
 \Huge \color{NavyBlue} \textbf{saeSim: Simulation Tools for Small Area Estimation} \color{Black}\\[0.5cm] % Title
 % \Huge\textit{An Exploration of Complexity}\\[2cm] % Subtitle
-\huge \textbf{ Sebastian Warnholz \& T. Schmid }\\[0.5cm] % Author(s)
+\huge \textbf{ Sebastian Warnholz \& Timo Schmid }\\[0.5cm] % Author(s)
 %\huge Freie Universität Berlin\\[0.4cm] % University/organization
 \Large \texttt{Sebastian.Warnholz@fu-berlin.de} \\
 \end{minipage}
@@ -142,13 +142,13 @@
 %\color{NavyBlue}
 
 \begin{verse}
-\textit{The package provides tools for the composition of simulation studies in the context of small area estimation. We want to support and encourage the publication of source code by providing a set of unified tools for the community.}
+\textit{With this package we provide tools for the composition of simulation studies in the context of small area estimation. We want to support and encourage the publication of source code by providing a standardised set of tools for the community.}
 \end{verse}
 
 \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
 
 \begin{itemize}
-  \item The field of Small Area Estimation summarises the development and application of statistical methods to report statistics for small groups. \textit{Small} refers to the small number of sampled units within groups.
+  \item The field of Small Area Estimation is concerned with the development and application of statistical methods to report statistics for small domains. \textit{Small} refers to the small number of sampled units within groups.
   \item Model and design based simulation studies have been used to introduce new methods to the field.
   \item Although we have small area estimation in mind, the framework may prove useful for the composition of micro simulations in general.
   \item The package highlights a specific way to map a simulation study into \code{R}, namely in terms of a pipeline where a data frame is modified in each step. 
@@ -205,7 +205,7 @@
 \end{verse}
 
 \begin{itemize}
-  \item This is a complete example beginning with the data generation, followed by simple random sampling in each domain and completing with a comparison of the mean squared error of the sample mean and the average of a linear predictor in each domain.
+  \item This is a complete example beginning with data generation, followed by simple random sampling in each domain and completing with a comparison of the mean squared error of the sample mean and the average of a linear predictor in each domain.
   \item Here we define \texttt{comp\_lm} to use a linear model to predict the area means. The data is aggregated for each domain by the aggregation function \texttt{sim\_agg}.
   \item At this time we do not see the need to provide tools for further reshaping and aggregation of results. Instead we rely on existing packages like \texttt{dplyr} which is used after the call to \texttt{sim}.
 \end{itemize}

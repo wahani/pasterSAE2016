@@ -1,7 +1,7 @@
 
 
 - You can use predefined generators, e.g. for spatially correlated variates, or include univariate random number generators from `R`.
-- `sim_gen` defines the position in the chain. `gen_generic` controls the generation process and accepts any random number generator. Also we defined shortcuts like `sim_gen_generic` to be less verbose.
+- `sim_gen` defines the position in the chain. `gen_generic` controls the generation process and accepts any random number generator as argument. Also we defined shortcuts like `sim_gen_generic` to be less verbose.
 - In the following you see a definition for drawing numbers from a linear mixed model. The response is constructed with an R expression and set by `sim_resp_eq`.
 
 
@@ -17,13 +17,13 @@ setup
 ```
 ## data.frame [10,000 x 6]
 ## 
-##    idD idU            x          e         v         y
-## 1    1   1 -0.341367085 -5.8689371 -2.237349  91.21098
-## 2    1   2 -3.496910745 -1.4657426 -2.237349  89.30309
-## 3    1   3  2.793777378 -6.6365887 -2.237349  96.71362
-## 4    1   4 -7.451192075  0.7091784 -2.237349  83.56945
-## 5    1   5  0.005423844 -3.5601176 -2.237349  94.21338
-## 6    1   6  2.639683043 -0.8874050 -2.237349 102.15461
-## .. ... ...          ...        ...       ...       ...
+##    idD idU          x          e        v         y
+## 1    1   1  0.7454883  3.6822042 1.459663 106.63284
+## 2    1   2  5.6934259 -0.2506387 1.459663 112.59588
+## 3    1   3  1.6492738 -1.2109953 1.459663 103.54722
+## 4    1   4  2.4255113  2.5900518 1.459663 108.90074
+## 5    1   5 -0.6598988 -5.8960966 1.459663  94.24377
+## 6    1   6 -8.6498785 -1.6075882 1.459663  82.55232
+## .. ... ...        ...        ...      ...       ...
 ```
 

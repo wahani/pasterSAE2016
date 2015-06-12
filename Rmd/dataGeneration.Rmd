@@ -3,7 +3,7 @@ library("saeSim")
 ```
 
 - You can use predefined generators, e.g. for spatially correlated variates, or include univariate random number generators from `R`.
-- `sim_gen` defines the position in the chain. `gen_generic` controls the generation process and accepts any random number generator. Also we defined shortcuts like `sim_gen_generic` to be less verbose.
+- `sim_gen` defines the position in the chain. `gen_generic` controls the generation process and accepts any random number generator as argument. Also we defined shortcuts like `sim_gen_generic` to be less verbose.
 - In the following you see a definition for drawing numbers from a linear mixed model. The response is constructed with an R expression and set by `sim_resp_eq`.
 
 ```{r}

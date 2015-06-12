@@ -3,7 +3,7 @@
 
 
 - Set the frequency or probability for adding contaminated observations.
-- You can choose between unit and area level outliers, i.e. \textit{outlying} units or \textit{outlying} groups in the data.
+- You can choose between unit and area level outliers, i.e. \textit{outlying} units or groups in the data.
 
 
 ```r
