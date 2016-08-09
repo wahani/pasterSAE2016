@@ -7,12 +7,18 @@
 
 
 ```r
-sim(setup, R = 16, mode = "socket", cpus = 4) %>% (dplyr::rbind_all) %>% dim
+sim(setup, R = 16, mode = "socket", cpus = 4) %>%  dplyr::bind_rows() %>% dim()
 ```
 
 ```
 ## Starting parallelization in mode=socket with cpus=4.
+```
+
+```
 ## Mapping in parallel: mode = socket; cpus = 4; elements = 16.
+```
+
+```
 ## Stopped parallelization. All cleaned up.
 ```
 

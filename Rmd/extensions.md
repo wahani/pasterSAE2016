@@ -11,7 +11,7 @@ simDat <- setup %>% sim_sample() %>%
   sim_comp_popMean() %>% 
   sim_comp_sample(comp_lm) %>% 
   sim_agg() %>% sim(R = 100) %>% 
-  rbind_all() %>% group_by(idD) %>% 
+  bind_rows() %>% group_by(idD) %>% 
   summarise(
     MSE_direct = mean((y - popMean)^2), 
     MSE_lm = mean((lm - popMean)^2)

@@ -9,7 +9,7 @@
 \StringTok{  }\KeywordTok{sim_comp_popMean}\NormalTok{() %>%}\StringTok{ }
 \StringTok{  }\KeywordTok{sim_comp_sample}\NormalTok{(comp_lm) %>%}\StringTok{ }
 \StringTok{  }\KeywordTok{sim_agg}\NormalTok{() %>%}\StringTok{ }\KeywordTok{sim}\NormalTok{(}\DataTypeTok{R =} \DecValTok{100}\NormalTok{) %>%}\StringTok{ }
-\StringTok{  }\KeywordTok{rbind_all}\NormalTok{() %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(idD) %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{bind_rows}\NormalTok{() %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(idD) %>%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}
     \DataTypeTok{MSE_direct =} \KeywordTok{mean}\NormalTok{((y -}\StringTok{ }\NormalTok{popMean)^}\DecValTok{2}\NormalTok{), }
     \DataTypeTok{MSE_lm =} \KeywordTok{mean}\NormalTok{((lm -}\StringTok{ }\NormalTok{popMean)^}\DecValTok{2}\NormalTok{)}

@@ -1,7 +1,5 @@
 ```{r echo = FALSE, message = FALSE}
 library("saeSim")
-library("ggplot2")
-library("gridExtra")
 
 setup <- sim_base() %>% 
   sim_gen_x() %>%
@@ -16,6 +14,6 @@ setup <- sim_base() %>%
 - Here we perform 16 runs on 4 cores. `sim` always returns a `list` and we combine the results directly using `rbind_all`.
 
 ```{r}
-sim(setup, R = 16, mode = "socket", cpus = 4) %>% (dplyr::rbind_all) %>% dim
+sim(setup, R = 16, mode = "socket", cpus = 4) %>%  dplyr::bind_rows() %>% dim()
 ```
 
